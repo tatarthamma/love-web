@@ -1,76 +1,189 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>บอกรักแฟน</title>
+  <title>Happy Birthday, My Love</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #ffe6f0;
-      font-family: 'Prompt', sans-serif;
+    body {
+    background-image: url(https://i.postimg.cc/DwZ2hJKF/Chat-GPT-Image-27-2568-23-39-37.png); /* เปลี่ยนเป็นลิงก์ภาพหัวใจของคุณ */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      overflow: hidden;
-      height: 100%;
+      padding: 2rem;
     }
     h1 {
-      margin-top: 20vh;
-      font-size: clamp(1.8rem, 6vw, 3rem);
+      font-size: 3rem;
       color: #ff3399;
-      padding: 0 20px;
+      margin-bottom: 1rem;
     }
-    #loveBtn {
-      font-size: 1.2rem;
+    .typewriter {
+      font-size: 1.5rem;
+      color: #333;
+      border-right: 2px solid #ff66b2;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    #giftBtn {
+      margin-top: 30px;
       padding: 12px 24px;
-      margin-top: 20px;
-      border: none;
+      font-size: 1.2rem;
       background-color: #ff66b2;
       color: white;
+      border: none;
       border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
     }
-    #response {
-      margin-top: 20px;
-      font-size: 1.5rem;
+    #giftBtn:hover {
+      transform: scale(1.1);
+    }
+    /* Popup Styles */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f8;
+      border: 2px solid #ff99cc;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      z-index: 9999;
+      width: 90%;
+      max-width: 320px;
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    .popup h2 {
+      margin-top: 0;
       color: #cc0066;
-      padding: 0 15px;
     }
+    .popup p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+    .closeBtn {
+      margin-top: 20px;
+      padding: 8px 16px;
+      background-color: #ff66b2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    /* Floating Hearts */
     .heart {
-      position: absolute;
-      color: #ff3366;
-      animation: fall linear forwards;
-      font-size: 24px;
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 4s linear forwards;
+      z-index: 0;
     }
-    @keyframes fall {
-      0% { top: -10px; opacity: 1; }
-      100% { top: 100vh; opacity: 0; }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>รักนะคนเก่งของเค้า ❤️</h1>
-  <button id="loveBtn">รักมั้ย?</button>
-  <div id="response"></div>
+  <div class="center">
+    <h1>🎂 Happy Birthday! 🎉</h1>
+    <div class="typewriter" id="typewriterText">Loading love for you...</div>
+    <button id="giftBtn">🎁 Click to Open Your Gift</button>
+  </div>
+
+  <!-- Popup Letter -->
+  <div id="popup" class="popup">
+    <h2>💌 จดหมายถึงเธอ</h2>
+    <p id="popupText"></p>
+    <button class="closeBtn" onclick="closePopup()">ปิด</button>
+  </div>
+
+  <audio id="popupSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
 
   <script>
-    // ปุ่มตอบรัก
-    document.getElementById('loveBtn').onclick = function () {
-      document.getElementById('response').innerText = "รักมากที่สุดในโลกเลย 💖";
-    };
+    const giftBtn = document.getElementById("giftBtn");
+    const popup = document.getElementById("popup");
+    const popupText = document.getElementById("popupText");
+    const popupSound = document.getElementById("popupSound");
 
-    // หัวใจตก
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 2 + Math.random() * 2 + "s";
-      heart.innerText = "❤️";
-      heart.style.top = "-10px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }, 200);
+    giftBtn.addEventListener("click", () => {
+      popup.style.display = "block";
+      popupText.innerHTML = "";
+      popupSound.play();
+      typePopup("You're my favorite reason to smile 💖\nThank you for being in my life.", popupText);
+      launchHearts(15);
+    });
+
+    function closePopup() {
+      popup.style.display = "none";
+    }
+
+    function typePopup(text, el, i = 0) {
+      if (i < text.length) {
+        el.innerHTML += text.charAt(i);
+        setTimeout(() => typePopup(text, el, i + 1), 50);
+      }
+    }
+
+    function launchHearts(count) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }
+    }
   </script>
 </body>
 </html>
