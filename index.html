@@ -1,40 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>บอกรักแฟน</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       background: #ffe6f0;
       font-family: 'Prompt', sans-serif;
       text-align: center;
       overflow: hidden;
+      height: 100%;
     }
     h1 {
-      margin-top: 100px;
-      font-size: 3rem;
+      margin-top: 20vh;
+      font-size: clamp(1.8rem, 6vw, 3rem);
       color: #ff3399;
+      padding: 0 20px;
     }
     #loveBtn {
-      font-size: 1.5rem;
-      padding: 10px 20px;
-      margin-top: 30px;
+      font-size: 1.2rem;
+      padding: 12px 24px;
+      margin-top: 20px;
       border: none;
       background-color: #ff66b2;
       color: white;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     #response {
       margin-top: 20px;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: #cc0066;
+      padding: 0 15px;
     }
     .heart {
       position: absolute;
       color: #ff3366;
-      animation: fall 4s linear infinite;
+      animation: fall linear forwards;
       font-size: 24px;
     }
     @keyframes fall {
@@ -59,8 +65,9 @@
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+      heart.style.animationDuration = 2 + Math.random() * 2 + "s";
       heart.innerText = "❤️";
+      heart.style.top = "-10px";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 5000);
     }, 200);
