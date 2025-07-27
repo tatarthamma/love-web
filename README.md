@@ -1,1 +1,69 @@
-# love-web
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>บอกรักแฟน</title>
+  <style>
+    body {
+      margin: 0;
+      background: #ffe6f0;
+      font-family: 'Prompt', sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      margin-top: 100px;
+      font-size: 3rem;
+      color: #ff3399;
+    }
+    #loveBtn {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      margin-top: 30px;
+      border: none;
+      background-color: #ff66b2;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #response {
+      margin-top: 20px;
+      font-size: 2rem;
+      color: #cc0066;
+    }
+    .heart {
+      position: absolute;
+      color: #ff3366;
+      animation: fall 4s linear infinite;
+      font-size: 24px;
+    }
+    @keyframes fall {
+      0% { top: -10px; opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>รักนะคนเก่งของเค้า ❤️</h1>
+  <button id="loveBtn">รักมั้ย?</button>
+  <div id="response"></div>
+
+  <script>
+    // ปุ่มตอบรัก
+    document.getElementById('loveBtn').onclick = function () {
+      document.getElementById('response').innerText = "รักมากที่สุดในโลกเลย 💖";
+    };
+
+    // หัวใจตก
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+      heart.innerText = "❤️";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 200);
+  </script>
+</body>
+</html>
