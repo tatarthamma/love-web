@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday, My Love</title>
+  <!-- วางใน <head> -->
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;600;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+
+  <title>Happy Birthday My Love</title>
   <style>
     body {
-    background-image: url(https://i.postimg.cc/DwZ2hJKF/Chat-GPT-Image-27-2568-23-39-37.png); /* เปลี่ยนเป็นลิงก์ภาพหัวใจของคุณ */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-    .center {
+      background-image: url(https://i.postimg.cc/jdrhsQ4G/Chat-GPT-Image-28-2568-16-05-20.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .center, #cakeGame {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,170 +24,2434 @@
       text-align: center;
       padding: 2rem;
     }
-    h1 {
-      font-size: 3rem;
-      color: #ff3399;
+
+    .photo {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #ff66b2;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       margin-bottom: 1rem;
     }
+    
+    h1 {
+      font-size: 3.5rem;
+      color: #ff66b2;
+      margin: 0rem 0; /* จาก 0.5rem → 0.2rem */
+      text-shadow: 2px 2px 4px #fff;
+    }
+
+    
     .typewriter {
-      font-size: 1.5rem;
+      font-size: 1.4rem; /* ลดลงจาก 1.8 เป็น 1.4 */
       color: #333;
-      border-right: 2px solid #ff66b2;
       white-space: nowrap;
       overflow: hidden;
       width: 0;
-      animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+      animation: typing 6s steps(40, end) forwards;
+
     }
+    
+    #puzzleTitle {
+  font-size: 1.8rem;       /* เดิม 2rem → เล็กลง */
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px 18px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  backdrop-filter: blur(3px);
+  color: #cc0077;
+  margin-bottom: 8px;
+}
+
+#puzzleInstructions {
+  font-size: 1rem;         /* เดิม 1.1rem → ลดเล็กน้อย */
+  padding: 8px 16px;
+  border-radius: 10px;
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  color: #273050;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+
+
+
+
+
     @keyframes typing {
       from { width: 0; }
       to { width: 100%; }
     }
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-    #giftBtn {
+
+    #giftBtn, .reveal-btn {
       margin-top: 30px;
-      padding: 12px 24px;
-      font-size: 1.2rem;
-      background-color: #ff66b2;
+      padding: 14px 30px;
+      font-size: 1.3rem;
+      background: linear-gradient(45deg, #ff99cc, #ff66b2);
       color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
-    #giftBtn:hover {
+
+    #giftBtn:hover, .reveal-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    #cakeGame {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #mainPage {
+  transition: opacity 0.5s ease;
+}
+
+
+    .cakes {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .cake {
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .cake:hover {
       transform: scale(1.1);
     }
-    /* Popup Styles */
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff0f8;
-      border: 2px solid #ff99cc;
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      z-index: 9999;
-      width: 90%;
-      max-width: 320px;
-      display: none;
-      text-align: center;
-      animation: fadeIn 0.8s ease forwards;
-    }
-    .popup h2 {
-      margin-top: 0;
-      color: #cc0066;
-    }
-    .popup p {
-      font-size: 1.2rem;
-      color: #444;
-    }
-    .closeBtn {
+
+    #resultMsg {
       margin-top: 20px;
-      padding: 8px 16px;
-      background-color: #ff66b2;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      font-size: 1.2rem;
+      color: #cc0077;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
-    /* Floating Hearts */
+
     .heart {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: floatUp 4s linear forwards;
-      z-index: 0;
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: pink;
+    transform: rotate(45deg);
+    animation: floatUp 15s linear forwards;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: inherit;
+    border-radius: 50%;
+  }
+
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+
+  .heart::after {
+    top: 0;
+    left: -10px;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(45deg);
+      opacity: 0.8;
     }
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
+    100% {
+      transform: translateY(-270vh) rotate(45deg);
+      opacity: 0;
     }
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-    .heart::after {
-      top: 0;
-      left: -10px;
-    }
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg);
-        opacity: 0;
-      }
-    }
+  }
+
+    .gift-boxes {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+  }
+  .gift {
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .gift:hover {
+    transform: scale(1.1);
+  }
+  .popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.15); /* โปร่งใส */
+    backdrop-filter: blur(4px);        /* เบลอแบบนุ่มหรู */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: 999;
+  }
+
+  .popup-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+
+  /* ===== Letter Popup (น่ารักสดใส) ===== */
+.popup--letter {
+  background: radial-gradient(rgba(255, 240, 246, 0.65), rgba(255, 255, 255, 0.2));
+  backdrop-filter: blur(6px);
+}
+
+.letter-card {
+  position: relative;
+  max-width: 360px;
+  width: calc(100% - 40px);
+  padding: 28px 24px 24px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff, #fff9fb);
+  box-shadow:
+    0 12px 30px rgba(255, 102, 178, 0.25),
+    0 6px 14px rgba(0, 0, 0, 0.08);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  animation: letter-pop-in .45s ease-out both;
+}
+
+/* ===== Success Popup (cute) ===== */
+.popup--success{
+  background: radial-gradient(rgba(255,240,246,.65), rgba(255,255,255,.2));
+  backdrop-filter: blur(6px);
+}
+
+.success-card{
+  position: relative;
+  max-width: 420px;
+  width: calc(100% - 40px);
+  padding: 28px 22px 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff, #fff6fb);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 14px 34px rgba(255,102,178,.28), 0 8px 18px rgba(0,0,0,.08);
+  animation: pop-in .45s ease-out both;
+}
+.success-card::before{
+  content:"";
+  position:absolute; inset:-3px; border-radius:24px;
+  background: linear-gradient(135deg,#ff96c8,#ffd1e8,#ffffff);
+  z-index:-1;
+}
+
+.success-title{
+  color:#cc0077; margin: 6px 0 6px; text-align:center;
+}
+.success-text{
+  color:#555; text-align:center; margin:0 0 12px;
+}
+
+/* Badge กลม ๆ ด้านบน */
+.success-badge{
+  position:relative;
+  width:96px; height:96px; margin:-62px auto 6px;
+  filter: drop-shadow(0 8px 14px rgba(255,102,178,.25));
+}
+.badge-ring{
+  background: conic-gradient(from 0deg, #ff79bd, #ffd1e8, #fff, #ff79bd);
+}
+.badge-core{
+  position:absolute; inset:10px; border-radius:50%;
+  display:grid; place-items:center;
+  background: radial-gradient(#fff, #ffe6f2);
+  font-size: 34px;
+}
+/* ปุ่ม */
+.success-actions{
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 8px;
+}
+.btn-primary{
+  padding: 12px 22px; border:none; border-radius:999px;
+  background: linear-gradient(45deg,#ff99cc,#ff66b2);
+  color:#fff; font-size:1rem; cursor:pointer;
+  box-shadow: 0 8px 18px rgba(255,102,178,.35);
+  transition: transform .15s ease, box-shadow .2s ease;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.btn-primary:hover{ transform: translateY(-1px) scale(1.03); box-shadow: 0 12px 24px rgba(255,102,178,.45); }
+
+.btn-ghost{
+  padding: 11px 18px; border-radius:999px; border:2px solid #ffd1e8; background:#fff;
+  color:#a80062; cursor:pointer; transition: transform .15s ease, box-shadow .2s ease;
+}
+.btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,.08); }
+
+/* สปาร์กเคิลลอยตลอด */
+.success-sparkle{
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background: radial-gradient(#fff,#ffd1e8);
+  pointer-events:none; opacity:.95;
+  animation: sparkle-float 2s ease-out forwards;
+}
+
+/* Keyframes */
+@keyframes pop-in{
+  from{ transform: translateY(6px) scale(.98); opacity:0; }
+  to{ transform: translateY(0) scale(1); opacity:1; }
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+@keyframes pulse{
+  0%,100%{ transform: translateY(0) scale(1); }
+  50%{ transform: translateY(-1px) scale(1.03); }
+}
+@keyframes sparkle-float{
+  to{ transform: translateY(-46px) translateX(var(--dx)); opacity:0; }
+}
+
+
+/* กรอบไล่สีด้านนอก */
+.letter-card::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ff96c8, #ffd1e8, #ffffff);
+  z-index: -1;
+}
+
+/* ซองจดหมาย */
+.letter-envelope {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 6px 0 10px;
+}
+.letter-icon {
+  width: 120px;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+}
+.envelope-top {
+  position: absolute;
+  top: -6px;
+  width: 120px;
+  height: 70px;
+  background: linear-gradient(180deg, #ffd6e7, #ffc1dc);
+  clip-path: polygon(0 0, 100% 0, 50% 70%);
+  transform-origin: top;
+  animation: flap 1.4s ease-in-out infinite alternate;
+}
+.heart-stamp {
+  position: absolute;
+  right: 8px;
+  bottom: -8px;
+  font-size: 28px;
+  transform: rotate(-12deg);
+  text-shadow: 0 2px 0 rgba(0,0,0,0.08);
+}
+
+/* ข้อความ */
+#letterTitle { color: #cc0077; margin: 8px 0 6px; }
+.letter-text { color: #555; margin: 0 0 12px; }
+
+/* ปุ่ม CTA วิ้ง ๆ */
+.letter-cta {
+  margin-top: 6px;
+  padding: 12px 26px;
+  font-size: 1.05rem;
+  background: linear-gradient(45deg, #ff99cc, #ff66b2);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(255, 102, 178, 0.35);
+  transition: transform .15s ease, box-shadow .2s ease;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.letter-cta:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 22px rgba(255, 102, 178, 0.45);
+}
+
+.letter-hint {
+  display: block;
+  margin-top: 10px;
+  color: #8a8a8a;
+  font-size: .85rem;
+}
+
+/* สปาร์กเคิลที่โปรยตอนเปิด popup */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(#fff, #ffd1e8);
+  opacity: 0.9;
+  pointer-events: none;
+  animation: sparkle-float 2s ease-out forwards;
+}
+
+
+/* แอนิเมชัน */
+@keyframes flap {
+  0%   { transform: rotateX(0deg); }
+  100% { transform: rotateX(35deg); }
+}
+@keyframes pulse {
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-1px) scale(1.03); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes sparkle-float {
+  to { transform: translateY(-40px) translateX(var(--dx)) scale(0.6); opacity: 0; }
+}
+@keyframes letter-pop-in {
+  from { transform: translateY(4px) scale(0.98); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+  .gift-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gift-label {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #cc0077;
+  font-weight: 500;
+  text-align: center;
+}
+
+.gift-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+  background: linear-gradient(145deg, #fff0f5, #ffe4ec); /* พื้นหลังนุ่มๆ */
+  border-radius: 20px;
+  box-shadow: inset 0 2px 10px rgba(255, 182, 193, 0.3),
+              0 8px 20px rgba(0, 0, 0, 0.15); /* มีมิติ */
+}
+
+.gift {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1),
+              inset 0 2px 5px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gift img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.gift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
+}
+
+.gift:hover img {
+  transform: scale(1.05);
+}
+
+
+  
+  .popup-content button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #ff66cc, #ff3399);
+}
+
+  .hidden {
+    display: none;
+  }
+
+  .party-popper {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 1000;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* ===== Cute Puzzle UI ===== */
+:root{
+  --pz-accent: #ff66b2;
+  --pz-soft: #fff2f7;
+  --pz-shadow: 0 10px 26px rgba(255, 102, 178, .25);
+  --pz-card: linear-gradient(180deg, #ffffff, #fff6fb);
+  --pz-tile: clamp(80px, 22vw, 120px); /* ขนาดชิ้นยืดหยุ่นตามจอ */
+}
+
+.puzzle-card{
+  position: relative;
+  max-width: min(95vw, 420px);
+  width: 100%;
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  background: var(--pz-card);
+  box-shadow: var(--pz-shadow);
+  border: 2px solid #ffd1e8;
+  margin: 0 auto; /* กึ่งกลางแนวนอน */
+
+}
+
+.puzzle-head{
+  display: grid;
+  gap: 6px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.puzzle-title{
+  font-size: 1.4rem;
+  color: #cc0077;
+  margin: 0;
+}
+.puzzle-sub{
+  font-size: .95rem;
+  color: #555;
+  margin: 0;
+}
+.puzzle-chips{
+  display: flex; justify-content: center; gap: 8px; margin-top: 4px;
+}
+.chip{
+  background: #ffe6f2;
+  color: #a80062;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .8rem;
+  box-shadow: 0 4px 10px rgba(255, 102, 178, .15);
+}
+
+.puzzle-grid{
+  display: grid;
+  grid-template-columns: repeat(3, var(--pz-tile));
+  grid-auto-rows: var(--pz-tile);
+  gap: 8px;
+  padding: 8px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fff0f5, #ffe3ee);
+  box-shadow: inset 0 2px 12px rgba(255, 182, 193, .35);
+  
+  /* เพิ่มเพื่อจัดกึ่งกลาง */
+  margin: 10px auto 12px; /* auto ทำให้กึ่งกลางแนวนอน */
+  justify-content: center; /* เผื่อความกว้างน้อยกว่า container */
+}
+
+
+/* แสดงเลขช่วยจำบนแต่ละชิ้น เมื่อเปิดโหมด hint */
+.puzzle-grid.show-labels img::after{
+  content: attr(data-label);
+  position: absolute;
+  top: 6px; left: 8px;
+  font-size: .8rem;
+  color: #fff;
+  background: rgba(204, 0, 119, .8);
+  border-radius: 10px;
+  padding: 2px 6px;
+  transform: translateZ(0);
+}
+
+/* ทำให้ IMG เป็นตำแหน่งอ้างอิงสำหรับ ::after */
+.puzzle-grid img{
+  position: relative;
+}
+
+.puzzle-piece{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.12),
+    inset 0 2px 4px rgba(255,255,255,.8);
+  cursor: grab;
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  background: #fff;
+}
+.puzzle-piece:active{ cursor: grabbing; }
+.puzzle-piece:hover{
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 10px 20px rgba(255, 105, 180, .35),
+    inset 0 2px 6px rgba(255,255,255,.9);
+  filter: saturate(1.05);
+}
+
+.puzzle-actions{
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+}
+.btn-cute{
+  padding: 10px 18px;
+  border: none; border-radius: 999px;
+  background: linear-gradient(45deg, #ff99cc, #ff66b2);
+  color: #fff; font-size: .98rem;
+  box-shadow: 0 6px 14px rgba(255,102,178,.3);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.btn-cute:hover{ transform: translateY(-1px) scale(1.02); box-shadow: 0 10px 22px rgba(255,102,178,.45); }
+.btn-ghost{
+  background: #fff;
+  color: #a80062;
+  border: 2px solid #ffd1e8;
+}
+
+/* ข้อความสถานะ */
+.puzzle-status{
+  text-align: center;
+  margin: 6px 0 2px;
+  min-height: 22px;
+  color: #a80062;
+  font-weight: 500;
+}
+
+/* เอฟเฟกต์เมื่อผิด: สั่นนิด ๆ */
+.shake{
+  animation: shake .35s ease;
+}
+@keyframes shake{
+  0%,100%{ transform: translateX(0); }
+  20%{ transform: translateX(-6px); }
+  40%{ transform: translateX(6px); }
+  60%{ transform: translateX(-4px); }
+  80%{ transform: translateX(4px); }
+}
+
+/* เอฟเฟกต์ฉลองเมื่อถูก */
+.celebrate{
+  box-shadow:
+    0 12px 30px rgba(102, 204, 255, .25),
+    0 6px 16px rgba(255, 204, 0, .25);
+  transition: box-shadow .4s ease;
+}
+
+/* ===== Final Game (cute) ===== */
+.final-card{
+  position: relative;
+  max-width: 760px;
+  width: calc(100% - 40px);
+  padding: 20px 18px 18px;
+  border-radius: 24px;
+  background: linear-gradient(180deg,#ffffff,#fff6fb);
+  box-shadow: 0 16px 36px rgba(255,102,178,.22), 0 8px 18px rgba(0,0,0,.06);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+.final-card::before{
+  content:"";
+  position:absolute; inset:-3px; border-radius:26px;
+  background: linear-gradient(135deg,#ff96c8,#ffd1e8,#ffffff);
+  z-index:-1;
+}
+
+.final-head{ text-align:center; margin-bottom: 8px; }
+.final-title{ color:#cc0077; margin: 6px 0 6px; font-size: 1.8rem; }
+.final-sub{ color:#555; margin: 0; }
+.final-chips{ margin-top:8px; display:flex; gap:8px; justify-content:center; }
+.chip{
+  background:#ffe6f2; color:#a80062; padding:4px 10px; border-radius: 999px;
+  font-size:.85rem; box-shadow: 0 4px 10px rgba(255,102,178,.15);
+}
+
+.gift-grid-3{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 16px;
+  margin: 14px auto 10px;
+  justify-items: center;
+}
+@media (max-width: 640px){
+  .gift-grid-3{ grid-template-columns: repeat(3, 1fr); gap: 12px; }
+}
+
+.gift-card{
+  position: relative;
+  width: min(200px, 26vw);
+  aspect-ratio: 1 / 1.08;
+  border: none; background: #fff; border-radius: 18px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.08), inset 0 2px 6px rgba(255,255,255,.9);
+  cursor:pointer;
+  transform: translateZ(0);
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+  overflow: hidden;
+}
+.gift-card:hover{
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 30px rgba(255,105,180,.28);
+  filter: saturate(1.03);
+}
+.gift-card:focus{ outline: 3px solid #ffd1e8; outline-offset: 3px; }
+
+.gift-img{
+  width: 78%;
+  height: auto;
+  display:block;
+  margin: 18px auto 10px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.08);
+}
+
+.gift-tag{
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  bottom: 10px;
+  background: #ffe6f2; color:#a80062;
+  padding: 6px 12px; border-radius: 999px; font-size: .9rem;
+  box-shadow: 0 6px 14px rgba(255,102,178,.22);
+}
+
+.gift-ribbon{
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  width: 84%; height: 30px; border-radius: 999px;
+  background: linear-gradient(90deg,#ff99cc,#ff66b2);
+  box-shadow: 0 8px 18px rgba(255,102,178,.35);
+}
+.gift-ribbon::before, .gift-ribbon::after{
+  content:""; position:absolute; top:22px; width: 18px; height: 22px; border-radius: 4px;
+  background: linear-gradient(180deg,#ff99cc,#ff66b2);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+.gift-ribbon::before{ left: 12%; transform: rotate(-12deg); }
+.gift-ribbon::after{ right: 12%; transform: rotate(12deg); }
+
+.gift-shine{
+  position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(110deg, rgba(255,255,255,.0) 10%, rgba(255,255,255,.35) 35%, rgba(255,255,255,.0) 60%);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: shine-sweep 4s ease-in-out infinite;
+}
+@keyframes shine-sweep{
+  0%{ transform: translateX(-120%) skewX(-12deg); }
+  60%{ transform: translateX(120%) skewX(-12deg); }
+  100%{ transform: translateX(120%) skewX(-12deg); }
+}
+
+.final-hint{ text-align:center; color:#777; margin: 6px 0 0; font-size: .95rem; }
+
+/* สถานะตอนเลือก */
+.gift-card.is-selected{
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 18px 34px rgba(255,105,180,.35);
+}
+
+/* ===== Gift Box Popup (cute) ===== */
+.popup--box{
+  background: radial-gradient(rgba(255,240,246,.65), rgba(255,255,255,.2));
+  backdrop-filter: blur(6px);
+}
+
+.box-card{
+  position: relative;
+  max-width: 420px;
+  width: calc(100% - 40px);
+  padding: 24px 20px 20px;
+  border-radius: 22px;
+  background: linear-gradient(180deg,#ffffff,#fff6fb);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 14px 34px rgba(255,102,178,.28), 0 8px 18px rgba(0,0,0,.08);
+  animation: pop-in .45s ease-out both;
+}
+.box-card::before{
+  content:"";
+  position:absolute; inset:-3px; border-radius:24px;
+  background: linear-gradient(135deg,#ff96c8,#ffd1e8,#ffffff);
+  z-index:-1;
+}
+
+.box-title{ color:#cc0077; text-align:center; margin:4px 0 6px; }
+.box-sub{ color:#555; text-align:center; margin:0 0 12px; }
+
+/* ริบบิ้น */
+.box-ribbon{
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width: 82%; height: 28px; border-radius: 999px;
+  background: linear-gradient(90deg,#ff99cc,#ff66b2);
+  box-shadow: 0 8px 18px rgba(255,102,178,.35);
+}
+.box-ribbon::before,.box-ribbon::after{
+  content:""; position:absolute; top:20px; width:18px; height:22px; border-radius:4px;
+  background: linear-gradient(180deg,#ff99cc,#ff66b2);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+.box-ribbon::before{ left:12%; transform: rotate(-12deg); }
+.box-ribbon::after{ right:12%; transform: rotate(12deg); }
+
+/* ตราประทับหัวใจ */
+.box-stamp{
+  position:absolute; right:12px; top:12px; font-size:28px;
+  transform: rotate(-14deg);
+  text-shadow: 0 2px 0 rgba(0,0,0,.08);
+}
+
+/* แสงวิ้ง */
+.box-shine{
+  position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(110deg, rgba(255,255,255,.0) 10%, rgba(255,255,255,.35) 35%, rgba(255,255,255,.0) 60%);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: shine-sweep 4s ease-in-out infinite;
+}
+
+.box-img{
+  width: 70%;
+  height: auto;
+  display:block;
+  margin: 8px auto 12px;
+  border-radius: 14px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.08);
+}
+
+/* ปุ่ม */
+.box-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.btn-primary{
+  padding: 12px 22px; border:none; border-radius:999px;
+  background: linear-gradient(45deg,#ff99cc,#ff66b2);
+  color:#fff; font-size:1rem; cursor:pointer;
+  box-shadow: 0 8px 18px rgba(255,102,178,.35);
+  transition: transform .15s, box-shadow .2s;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.btn-primary:hover{ transform: translateY(-1px) scale(1.03); box-shadow: 0 12px 24px rgba(255,102,178,.45); }
+
+.btn-ghost{
+  padding: 11px 18px; border-radius:999px; border:2px solid #ffd1e8; background:#fff;
+  color:#a80062; cursor:pointer; transition: transform .15s, box-shadow .2s;
+}
+.btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,.08); }
+
+/* สปาร์กเคิลลอย */
+.box-sparkle{
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background: radial-gradient(#fff,#ffd1e8);
+  pointer-events:none; opacity:.95;
+  animation: sparkle-float 2s ease-out forwards;
+}
+
+/* keyframes reuse */
+@keyframes pop-in{ from{ transform:translateY(6px) scale(.98); opacity:0; } to{ transform:translateY(0) scale(1); opacity:1; } }
+@keyframes shine-sweep{ 0%{ transform: translateX(-120%) skewX(-12deg);} 60%{ transform: translateX(120%) skewX(-12deg);} 100%{ transform: translateX(120%) skewX(-12deg);} }
+@keyframes sparkle-float{ to{ transform: translateY(-46px) translateX(var(--dx)); opacity:0; } }
+
+/* ===== Gift Card Popup (cute) ===== */
+.popup--card{
+  background: radial-gradient(rgba(255,240,246,.65), rgba(255,255,255,.2));
+  backdrop-filter: blur(6px);
+}
+
+/* พื้นที่การ์ดที่จะถูกแคปฯ */
+.card-canvas{
+  position: relative;
+  margin: 0 auto 10px;
+  padding: 20px 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg,#ffffff,#fff8fb);
+  border: 2px dashed #ffd1e8;                /* ขอบแบบการ์ด */
+  box-shadow: 0 10px 24px rgba(255,102,178,.18), inset 0 2px 8px rgba(255,255,255,.8);
+  max-width: min(92vw, 420px);
+}
+
+/* หัวข้อการ์ด */
+.card-title{
+  font-family: "Mitr", "Sarabun", sans-serif;
+  color:#cc0077;
+  text-align:center;
+  margin: 4px 0 8px;
+  font-size: 1.5rem;         /* โทนการ์ด */
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* GIF ให้เล็กลงกว่าเดิม */
+.card-gif{
+  display:block;
+  width: min(80vw, 260px);     /* เดิม ~360px → ย่อให้กำลังพอดี */
+  height: auto;
+  margin: 0 auto 10px;
+  border-radius: 14px;
+  border: 4px solid #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  animation: gentle-bounce 2.2s ease-in-out infinite;
+}
+
+/* ข้อความอวยพร */
+.card-message{
+  color:#555;
+  text-align:center;
+  margin: 8px auto 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  max-width: 36ch;
+  white-space: pre-line;
+}
+
+/* ของตกแต่งมุมการ์ด (เล็กน้อย) */
+.card-canvas::before,
+.card-canvas::after{
+  content:"";
+  position:absolute;
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  background: radial-gradient(#fff,#ffe6f2);
+  box-shadow: 0 4px 12px rgba(255,102,178,.25);
+}
+.card-canvas::before{ top:10px; left:10px; transform: rotate(12deg); }
+.card-canvas::after{ bottom:10px; right:10px; transform: rotate(-12deg); }
+
+
+.card-wrap{
+  position: relative;
+  max-width: 480px;
+  width: calc(100% - 40px);
+  padding: 26px 20px 20px;
+  border-radius: 24px;
+  background: linear-gradient(180deg,#ffffff,#fff6fb);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 16px 36px rgba(255,102,178,.25), 0 8px 18px rgba(0,0,0,.08);
+  animation: pop-in .45s ease-out both;
+}
+.card-wrap::before{
+  content:"";
+  position:absolute; inset:-3px; border-radius:26px;
+  background: linear-gradient(135deg,#ff96c8,#ffd1e8,#ffffff);
+  z-index:-1;
+}
+
+
+.card-actions{
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+}
+
+.btn-primary{
+  padding: 12px 22px; border:none; border-radius:999px;
+  background: linear-gradient(45deg,#ff99cc,#ff66b2);
+  color:#fff; font-size:1rem; cursor:pointer;
+  box-shadow: 0 8px 18px rgba(255,102,178,.35);
+  transition: transform .15s ease, box-shadow .2s ease;
+  animation: pulse 1.6s ease-in-out infinite;
+  text-decoration: none; display:inline-block;
+}
+.btn-primary:hover{ transform: translateY(-1px) scale(1.03); box-shadow: 0 12px 24px rgba(255,102,178,.45); }
+
+.btn-ghost{
+  padding: 11px 18px; border-radius:999px; border:2px solid #ffd1e8; background:#fff;
+  color:#a80062; cursor:pointer; transition: transform .15s ease, box-shadow .2s ease;
+}
+.btn-ghost:hover{ transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,0,0,.08); }
+
+/* เครื่องประดับ */
+.card-badge{
+  position:relative;
+  width:94px; height:94px; margin:-64px auto 6px;
+  filter: drop-shadow(0 8px 14px rgba(255,102,178,.28));
+}
+.badge-ring{
+  position:absolute; inset:0; border-radius:50%;
+  background: conic-gradient(from 0deg,#ff79bd,#ffd1e8,#fff,#ff79bd);
+}
+.badge-core{
+  position:absolute; inset:10px; border-radius:50%;
+  display:grid; place-items:center;
+  background: radial-gradient(#fff,#ffe6f2);
+  font-size: 30px;
+}
+
+.card-ribbon{
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width: 86%; height: 28px; border-radius: 999px;
+  background: linear-gradient(90deg,#ff99cc,#ff66b2);
+  box-shadow: 0 8px 18px rgba(255,102,178,.35);
+}
+.card-ribbon::before,.card-ribbon::after{
+  content:""; position:absolute; top:20px; width:18px; height:22px; border-radius:4px;
+  background: linear-gradient(180deg,#ff99cc,#ff66b2);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+.card-ribbon::before{ left:12%; transform: rotate(-12deg); }
+.card-ribbon::after{ right:12%; transform: rotate(12deg); }
+
+.card-shine{
+  position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(110deg, rgba(255,255,255,.0) 10%, rgba(255,255,255,.35) 35%, rgba(255,255,255,.0) 60%);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: shine-sweep 4s ease-in-out infinite;
+}
+
+/* สปาร์กเคิลลอย */
+.card-sparkle{
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background: radial-gradient(#fff,#ffd1e8);
+  pointer-events:none; opacity:.95;
+  animation: sparkle-float 2s ease-out forwards;
+}
+
+/* keyframes reuse */
+@keyframes pop-in{ from{ transform:translateY(6px) scale(.98); opacity:0; } to{ transform:translateY(0) scale(1); opacity:1; } }
+@keyframes spin{ to{ transform: rotate(360deg); } }
+@keyframes shine-sweep{ 0%{ transform: translateX(-120%) skewX(-12deg);} 60%{ transform: translateX(120%) skewX(-12deg);} 100%{ transform: translateX(120%) skewX(-12deg);} }
+@keyframes sparkle-float{ to{ transform: translateY(-46px) translateX(var(--dx)); opacity:0; } }
+@keyframes gentle-bounce{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-4px); }
+}
+
+.card-subtitle{
+  font-family: "Sarabun", sans-serif;
+  text-align: center;
+  margin: 6px auto 6px;
+  font-size: 1.1rem;           /* เล็กกว่า .card-title */
+  font-weight: 600;
+  letter-spacing: .2px;
+  max-width: 36ch;
+}
+.card-subtitle .sub-label {
+  font-family: "Sarabun", sans-serif;
+  color: #a80062;              /* สีเข้มกว่านิด */
+  margin-right: .35ch;
+}
+.card-subtitle .sub-value{
+  font-family: "Sarabun", sans-serif;
+  color: #a80062;              /* สีเข้มกว่านิด */
+  margin-right: .35ch;
+}
+
+.card-subnote{
+  font-family: "Sarabun", sans-serif;
+  text-align: center;
+  margin: 2px auto 8px;
+  color: #a80062;
+  opacity: .80;           /* อ่อนกว่าส่วนหัวข้อหลัก */
+  font-size: 1.1rem;      /* เล็กกว่า "คือ…" (1.1rem) */
+  font-weight: 600;
+  letter-spacing: .2px;
+  max-width: 36ch;
+}
+
+/* ให้กรอบการ์ดดูพรีเมียมขึ้น + เก็บของตกแต่งไว้ข้างในทั้งหมด */
+.card-canvas{
+  position: relative;
+  overflow: hidden;                 /* กันของตกแต่งล้นกรอบ */
+  background: linear-gradient(180deg,#ffffff,#fff8fb);
+  border-radius: 20px;
+  border: 2px dashed #ffd1e8;
+  padding: 22px 18px 18px;
+}
+
+/* ลายละมุนบางๆ เป็นวอลเปเปอร์ในกรอบ (จับภาพได้แน่นอน) */
+.card-canvas::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(12px 12px at 10% 15%, rgba(255,204,230,.22) 0 40%, transparent 45%) ,
+    radial-gradient(10px 10px at 80% 30%, rgba(255,204,230,.18) 0 40%, transparent 45%),
+    radial-gradient(12px 12px at 25% 80%, rgba(255,204,230,.20) 0 40%, transparent 45%);
+  opacity:.6;
+}
+
+/* ริบบิ้นไล่สีใต้หัวข้อ (ใช้เส้นใต้แบบ pill) */
+.card-title{
+  position: relative;
+  padding-bottom: 6px;
+}
+.card-title::after{
+  content:"";
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-2px; width: 180px; height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg,#ff9acb,#ff66b2);
+  filter: blur(0.3px) drop-shadow(0 4px 8px rgba(255,102,178,.25));
+}
+
+/* ชิปน่ารักใต้หัวข้อ */
+.cc-chips{
+  display:flex; gap:6px; justify-content:center; flex-wrap:wrap;
+  margin: 4px 0 2px;
+}
+.cc-chip{
+  background:#ffe6f2; color:#a80062;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .85rem;
+  box-shadow: 0 4px 10px rgba(255,102,178,.15), inset 0 2px 6px rgba(255,255,255,.9);
+}
+
+/* เส้นคั่นหัวใจ */
+.cc-divider{
+  position: relative;
+  display: grid; place-items: center;
+  margin: 8px auto 2px; width: 100%; max-width: 360px; height: 14px;
+}
+.cc-divider::before{
+  content:""; position:absolute; left: 16px; right:16px; top:50%;
+  height: 2px; transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, #ffd1e8, transparent);
+}
+.cc-heart{
+  position: relative; z-index:1;
+  display:inline-block; padding: 0 10px;
+  color:#cc0077; font-size: .95rem;
+  box-shadow: 0 2px 8px rgba(255,102,178,.18);
+}
+
+/* ระยิบระยับภายในกรอบ */
+.cc-sparkles{ position:absolute; inset:0; pointer-events:none; }
+.cc-sparkles span{
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background: radial-gradient(#fff,#ffd1e8);
+  opacity:.9; animation: cc-float 3.2s ease-in-out infinite;
+}
+@keyframes cc-float{
+  0%,100%{ transform: translateY(0) scale(1); opacity:.9; }
+  50%{ transform: translateY(-10px) scale(0.95); opacity:.75; }
+}
+/* เลย์เอาต์ตำแหน่งสปาร์กเคิล */
+.cc-sparkles span:nth-child(1){ left:8%;  top:10%; animation-delay:.1s; }
+.cc-sparkles span:nth-child(2){ left:78%; top:16%; animation-delay:.4s; }
+.cc-sparkles span:nth-child(3){ left:14%; top:58%; animation-delay:.2s; }
+.cc-sparkles span:nth-child(4){ left:86%; top:66%; animation-delay:.6s; }
+.cc-sparkles span:nth-child(5){ left:28%; top:28%; animation-delay:.8s; }
+.cc-sparkles span:nth-child(6){ left:64%; top:40%; animation-delay:.3s; }
+.cc-sparkles span:nth-child(7){ left:38%; top:78%; animation-delay:1.0s; }
+.cc-sparkles span:nth-child(8){ left:52%; top:16%; animation-delay:1.2s; }
+
+/* ฟุตเตอร์เล็กๆ */
+.cc-footer{
+  display:flex; gap:8px; justify-content:center; align-items:center;
+  margin-top: 8px; color:#a80062; opacity:.8; font-size:.92rem;
+}
+.cc-dot{ opacity:.6; }
+.cc-tag{
+  background:#fff; border:1px solid #ffd1e8; border-radius:999px;
+  padding: 3px 10px; box-shadow: 0 3px 10px rgba(255,102,178,.12);
+}
+
+/* (มีอยู่แล้ว) ปรับขนาด GIF ให้พอดี และหัวข้อย่อย */
+.card-gif{ width: min(80vw, 260px); }
+.card-subtitle{ font-size: 1.1rem; }
+.card-subnote{ font-size: 1.0rem; opacity:.80; }
+.card-subtitle .sub-label{ color:#a80062; }
+.card-subtitle .sub-value{ color:#a80062; opacity:.75; }
+
+/* ==== Compact size for gift card popup (shrink ~12–15%) ==== */
+#giftCardPopup .popup-content.card-wrap{
+  width: min(90vw, 400px);        /* เดิม ~520px */
+  padding: 18px 16px 16px;        /* เดิมมากกว่านี้เล็กน้อย */
+}
+
+#giftCardPopup .card-canvas{
+  max-width: min(88vw, 360px);    /* เดิม ~420px */
+  padding: 16px 14px 14px;        /* ลด padding ลงนิด */
+  border-radius: 18px;
+}
+
+/* หัวข้อและข้อความ – ลดลงทีละนิด */
+#giftCardPopup .card-title{ font-size: 1.25rem; }     /* เดิม ~1.35rem */
+#giftCardPopup .card-subtitle{ font-size: 1.00rem; }  /* เดิม 1.1rem */
+#giftCardPopup .card-subnote{ font-size: 0.95rem; }   /* เดิม 1.0rem */
+#giftCardPopup .card-message{ font-size: 0.98rem; }   /* เดิม ~1.05rem */
+
+/* GIF เล็กลงอีกหน่อย */
+#giftCardPopup .card-gif{
+  width: min(70vw, 210px);        /* เดิม ~260px */
+  margin-bottom: 8px;
+}
+
+/* ระยะห่างจุกจิกให้กระชับ */
+#giftCardPopup .cc-chips{ gap: 6px; margin: 4px 0 2px; }
+#giftCardPopup .cc-chip{ padding: 3px 8px; font-size: .8rem; }
+#giftCardPopup .cc-divider{ margin: 6px auto 2px; max-width: 320px; }
+#giftCardPopup .cc-footer{ margin-top: 6px; font-size: .88rem; gap: 6px; }
+
+/* ปุ่มให้เล็กลงนิด เพื่อบาลานซ์สัดส่วนรวม */
+#giftCardPopup .card-actions .btn-primary,
+#giftCardPopup .card-actions .btn-ghost{
+  padding: 10px 18px;
+  font-size: .95rem;
+}
+/* Scale-down visually while keeping layout robust */
+#giftCardPopup .popup-content.card-wrap{
+  transform: scale(.80);              /* ปรับ .85-.92 ตามชอบ */
+  transform-origin: top center;
+  width: min(88vw, 460px);            /* เผื่อที่ให้พอดีหลังสเกล */
+  margin: 20px auto;
+}
+
+/* ===== Hero (หน้าแรก) สวย น่ารัก สดใส ===== */
+#mainPage{
+  position: relative;
+  padding: 24px 16px;
+}
+
+/* ละมุนพื้นหลังแบบเบา ๆ อยู่ในหน้าแรกเท่านั้น */
+#mainPage::before{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(16rem 12rem at 18% 20%, rgba(255,204,230,.28), transparent 60%),
+    radial-gradient(18rem 14rem at 82% 30%, rgba(255,204,230,.22), transparent 65%),
+    radial-gradient(20rem 16rem at 50% 85%, rgba(255,204,230,.20), transparent 70%);
+  z-index: 0;
+}
+
+/* การ์ดใส ๆ รวมหัวข้อ/ข้อความ/ปุ่ม */
+.hero-card{
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 560px);
+  padding: 22px 20px 18px;
+  border-radius: 24px;
+  background: linear-gradient(180deg,#ffffffcc,#fff6fbcc);
+  border: 2px solid #ffd1e8;
+  box-shadow: 0 16px 36px rgba(255,102,178,.20), 0 8px 18px rgba(0,0,0,.06);
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+/* รูปโปรไฟล์: วงแหวนชมพู + ลอยนิด ๆ */
+.hero-photo{
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  border: 5px solid #fff;
+  position: relative;
+  animation: hero-float 3.5s ease-in-out infinite;
+}
+.hero-photo::after{ /* เผื่อบางเบราว์เซอร์ไม่รองรับ pseudo บน img ข้ามไปได้ */
+  content: "";
+}
+
+@keyframes hero-float{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-6px); }
+}
+
+/* หัวข้อให้เข้าธีมการ์ด */
+.hero-title{
+  margin: .25rem 0;
+  color: #cc0077;
+  text-shadow: 0 2px 0 rgba(255,255,255,.9);
+  font-size: 2.4rem;              /* อ่านง่ายบนมือถือ */
+  letter-spacing: .3px;
+}
+
+/* เส้นริบบิ้นใต้หัวข้อแถวล่าง */
+
+.hero-title:last-of-type::after{
+  content:"";
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-2px; width: 200px; height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg,#ff9acb,#ff66b2);
+  filter: drop-shadow(0 4px 8px rgba(255,102,178,.25));
+}
+
+/* ชิปน่ารัก (รีใช้ .chip เดิมได้เลย) */
+.hero-chips{
+  display:flex; justify-content:center; gap:8px; flex-wrap:wrap;
+  margin: 6px 0 4px;
+}
+
+/* ข้อความไทป์ไรเตอร์ให้ balance กับการ์ด */
+.hero-subnote{
+  margin-top: 6px;
+  color: #273050;
+  font-size: 1.1rem;   /* อ่านสบายขึ้น */
+  text-shadow: 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* เส้นคั่นหัวใจแบบเดียวกับการ์ด */
+.hero-divider{
+  position: relative; display:grid; place-items:center;
+  width: 100%; max-width: 420px; height: 16px; margin: 10px auto 4px;
+}
+.hero-divider::before{
+  content:""; position:absolute; left: 16px; right:16px; top:50%;
+  height: 2px; transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, #ffd1e8, transparent);
+}
+.hero-divider span{
+  position: relative; z-index:1; background:#fff; border-radius:999px;
+  padding: 0 10px; color:#cc0077; font-size: .95rem;
+  box-shadow: 0 2px 8px rgba(255,102,178,.18);
+}
+
+/* ปุ่ม: เงาวิ้งก์วิ้ง + ขนาดพอดีมือ */
+.hero-cta{
+  position: relative;
+  margin-top: 12px;
+  padding: 14px 28px;
+  border-radius: 999px;
+}
+.hero-cta::after{
+  content:"";
+  position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(110deg, rgba(255,255,255,0) 10%, rgba(255,255,255,.45) 35%, rgba(255,255,255,0) 60%);
+  transform: translateX(-120%) skewX(-12deg);
+  animation: hero-shine 3.2s ease-in-out infinite;
+  border-radius: inherit;
+}
+@keyframes hero-shine{
+  0%{ transform: translateX(-120%) skewX(-12deg); }
+  60%{ transform: translateX(120%)  skewX(-12deg); }
+  100%{ transform: translateX(120%)  skewX(-12deg); }
+}
+
+/* ตอบสนองจอเล็ก */
+@media (max-width: 420px){
+  .hero-title{ font-size: 2.1rem; }
+  .hero-card{ padding: 18px 16px; width: min(94vw, 560px); }
+}
+
+
+#giftCardPopup.is-30{
+  overflow-y: auto;
+  padding: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* จัด #mainPage (ซึ่งเป็น hero-card) ให้อยู่กลางหน้า */
+#mainPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;          /* จัดกึ่งกลางแนวตั้ง */
+  min-height: 100vh;                /* เต็มความสูงหน้าจอ */
+  min-height: 100dvh;               /* รองรับมือถือที่แถบบน/ล่างยืดหด */
+  padding: 24px 16px;
+  box-sizing: border-box;
+  margin: 0 auto;                   /* กึ่งกลางแนวนอน */
+}
+
+/* จำกัดความกว้างการ์ดให้พอดีทุกหน้าจอ */
+#mainPage.hero-card{
+  width: min(92vw, 560px);
+}
+
+/* QR มุมล่างขวา ในกรอบการ์ด */
+.cc-qr{
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  justify-items: center;
+  text-decoration: none;
+  gap: 3px;
+  z-index: 2;
+}
+
+.cc-qr img{
+  width: 40px;        /* ปรับ 56–96 ได้ตามชอบ */
+  height: 40px;
+  background: #fff;   /* ขาวตัดพื้นหลัง */
+  border: 2px solid #ffd1e8;/* กรอบชมพูอ่อนให้เด่น แต่ไม่หนาเกิน */
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.10);
+}
+
+.cc-qr-label{
+  font-size: .72rem;
+  color: #a80062;
+  background: #fff;
+  border: 1px solid #ffd1e8;
+  border-radius: 999px;
+  padding: 2px 6px;
+  box-shadow: 0 3px 8px rgba(255,102,178,.12);
+  line-height: 1;
+}
+
+/* เผื่อจอเล็กมากให้ลดลงนิด */
+@media (max-width: 380px){
+  .cc-qr img{ width: 60px; height: 60px; }
+}
+
+
+
+
   </style>
 </head>
 <body>
-  <div class="center">
-    <h1>🎂 Happy Birthday! 🎉</h1>
-    <div class="typewriter" id="typewriterText">Loading love for you...</div>
-    <button id="giftBtn">🎁 Click to Open Your Gift</button>
+    <div class="hero-card"id="mainPage">
+  <img src="https://i.postimg.cc/brZ9s3Bh/S-7790595.jpg" alt="My Love" class="photo hero-photo" />
+    
+    <h1 class="hero-title">Happy Birthday</h1>
+  <h1 class="hero-title">My Love</h1>
+
+  <!-- ข้อความไทป์ไรเตอร์เดิม (คง id เดิม) -->
+  <p class="typewriter hero-subnote" id="typewriterText">พร้อมไหม ของขวัญสุดพิเศษรอเธออยู่นะ…</p>
+
+  <!-- ปุ่มเดิม เพิ่มคลาส hero-cta เพื่อแต่งเอฟเฟกต์ -->
+  <button id="giftBtn" class="hero-cta"> เปิดของขวัญ 💌 </button>
+</div>
+
+  <button id="toggleMusicBtn" style="
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #ff99cc, #ff66b2);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+">🔈 </button>
+
+<!-- Popup ซองจดหมาย (น่ารักสดใส) -->
+<div id="letterPopup" class="popup popup--letter hidden" aria-modal="true" role="dialog" aria-labelledby="letterTitle">
+  <div class="popup-content letter-card">
+
+    <div class="letter-envelope">
+      <img src="https://i.postimg.cc/wTxjKndP/letter.png" alt="ซองจดหมาย" class="letter-icon" />
+    </div>
+
+    <h2 id="letterTitle">เดี๋ยวก่อนน๊าที่รัก</h2>
+    <p class="letter-text">
+      เค้ามีเกมให้เธอเล่นก่อนนะ พร้อมแล้วก็กดเลย!
+    </p>
+
+    <button class="letter-cta" onclick="startMemoryPuzzle()">เริ่มเล่นเลย </button>
+  </div>
+</div>
+
+
+  
+  <!-- Popup ชนะเกม (น่ารักสดใส) -->
+<div id="popupSuccess" class="popup popup--success hidden" aria-modal="true" role="dialog" aria-labelledby="successTitle">
+  <div class="popup-content success-card">
+    <div class="success-badge" aria-hidden="true">
+      <div class="badge-ring"></div>
+      <div class="badge-core">🎉</div>
+    </div>
+
+    <h2 id="successTitle" class="success-title">เย่! เก่งมากที่รัก</h2>
+    <p class="success-text">
+      เรียงภาพถูกต้องแล้วน๊า  <br>ของขวัญที่เค้าเตรียมไว้รออยู่ข้างหน้าเเล้ว พร้อมรึยัง
+    </p>
+
+    <div class="success-actions">
+      <button class="btn-primary" onclick="goToFinalGame()">ไปเปิดของขวัญ 💌</button>
+      <!-- ถ้าไม่อยากมีปุ่มรอง ก็ตัดปุ่มด้านล่างทิ้งได้ -->
+      <button class="btn-ghost" onclick="closeSuccess()">เดี๋ยวก่อน</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <div id="finalGame" class="center" style="display:none;">
+  <div class="final-card" aria-labelledby="finalTitle">
+    <div class="final-head">
+      <h1 id="finalTitle" class="final-title">เลือกกล่องของขวัญสุดพิเศษ</h1>
+      <p class="final-sub">แต่ละกล่องมีเซอร์ไพรส์ไม่เหมือนกันนะ เลือกด้วยหัวใจเลย </p>
+      <div class="final-chips">
+        <span class="chip">จะได้ไหมน๊า มาลุ้นกัน💗</span>
+      </div>
+    </div>
+
+    <div class="gift-grid-3" id="giftGrid">
+      <!-- กล่อง 1 -->
+      <button class="gift-card" data-index="0" aria-label="เปิดกล่องที่หนึ่ง">
+        <img src="https://i.postimg.cc/MpMdmyDG/Chat-GPT-Image-6-2568-16-28-12.png" alt="" class="gift-img" />
+        <span class="gift-shine" aria-hidden="true"></span>
+      </button>
+
+      <!-- กล่อง 2 -->
+      <button class="gift-card" data-index="1" aria-label="เปิดกล่องที่สอง">
+        <img src="https://i.postimg.cc/MpMdmyDG/Chat-GPT-Image-6-2568-16-28-12.png" alt="" class="gift-img" />
+        <span class="gift-shine" aria-hidden="true"></span>
+      </button>
+
+      <!-- กล่อง 3 -->
+      <button class="gift-card" data-index="2" aria-label="เปิดกล่องที่สาม">
+        <img src="https://i.postimg.cc/MpMdmyDG/Chat-GPT-Image-6-2568-16-28-12.png" alt="" class="gift-img" />
+        <span class="gift-shine" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <p class="final-hint">แตะ/คลิกกล่องที่ถูกใจ แล้วไปลุ้นของขวัญเลย<br>(ระวังกล่องเปล่า!)</p>
+  </div>
+</div>
+
+<!-- Popup การ์ดของขวัญจริง (น่ารักสดใส) -->
+<div id="giftCardPopup" class="popup popup--card hidden" aria-modal="true" role="dialog" aria-labelledby="giftCardTitle">
+  <div class="popup-content card-wrap">
+    <!-- ตกแต่ง (คงไว้ได้) -->
+    <div class="card-badge" aria-hidden="true">
+      <div class="badge-ring"></div>
+      <div class="badge-core">💖</div>
+    </div>
+
+    <div id="cardCanvasArea" class="card-canvas" role="group" aria-label="บัตรอวยพร">
+      <h1 id="giftCardTitle" class="card-title">Happy Birthday My Love</h1>
+      <div class="cc-chips" aria-hidden="true">
+    <span class="cc-chip">ของขวัญเธอ</span>
+  </div>
+      <img id="giftGif" src="" alt="ของขวัญ" class="card-gif" crossorigin="anonymous" />
+      <h3 id="giftSubTitle" class="card-subtitle">
+        <span class="sub-label">🎉</span>
+      </h3>
+
+      <a id="giftQRLink" class="cc-qr" href="https://www.canva.com/design/DAGvrphMl34/w44lPAbAlAfqbjG5A33Qzw/watch?utm_content=DAGvrphMl34&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h332c25f8d2" target="_blank" rel="noopener">
+  <img id="giftQR" alt="QR to video" crossorigin="anonymous" />
+  <span class="cc-qr-label">จิ้ม/แสกน ▶</span>
+</a>
+
+      <!-- เส้นคั่นหัวใจ -->
+  <div class="cc-divider" aria-hidden="true"><span class="cc-heart">❤︎</span></div>
+
+
+      <p id="giftMessage" class="card-message"></p>
+
+      <!-- ระยิบระยับภายในกรอบ (จับภาพได้ เพราะอยู่ในกรอบนี้) -->
+  <div class="cc-sparkles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
   </div>
 
-  <!-- Popup Letter -->
-  <div id="popup" class="popup">
-    <h2>💌 จดหมายถึงเธอ</h2>
-    <p id="popupText"></p>
-    <button class="closeBtn" onclick="closePopup()">ปิด</button>
+</div>
+
+
+    <!-- ปุ่ม -->
+    <div class="card-actions">
+      <button id="saveCardBtn" class="btn-primary" type="button">บันทึกการ์ด ⤓</button>
+      <button class="btn-ghost" onclick="closeGiftCard()">ปิด</button>
+    </div>
   </div>
+</div>
 
-  <audio id="popupSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
 
-  <script>
-    const giftBtn = document.getElementById("giftBtn");
-    const popup = document.getElementById("popup");
-    const popupText = document.getElementById("popupText");
-    const popupSound = document.getElementById("popupSound");
 
-    giftBtn.addEventListener("click", () => {
-      popup.style.display = "block";
-      popupText.innerHTML = "";
-      popupSound.play();
-      typePopup("You're my favorite reason to smile 💖\nThank you for being in my life.", popupText);
-      launchHearts(15);
+
+<!-- Popup กล่องชั้นแรก (น่ารักสดใส) -->
+<div id="giftBoxPopup" class="popup popup--box hidden" aria-modal="true" role="dialog" aria-labelledby="giftBoxTitle">
+  <div class="popup-content box-card">
+
+    <h2 id="giftBoxTitle" class="box-title">ที่รักเลือกกล่องนี้แล้วน๊า</h2>
+    <p class="box-sub">อยากรู้ไหมว่าข้างในคืออะไร? ลุ้นเลย </p>
+
+    <img id="selectedBoxImg" src="" alt="กล่องที่เลือก" class="box-img" />
+
+    <div class="box-actions">
+      <button class="btn-primary" onclick="revealGift()">เปิดเลย💌</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  
+  <!-- วางแทนส่วน <script> เดิม -->
+<script>
+  const giftBtn = document.getElementById("giftBtn");
+  const mainPage = document.getElementById("mainPage");
+  const colors = ['#ffc0cb', '#ffb6c1', '#ff69b4', '#f08080', '#ffa07a', '#ffd1dc'];
+  const openGiftSound = new Audio("https://www.soundjay.com/buttons/sounds/button-09a.mp3");
+  openGiftSound.volume = 0.02; // ปรับความดังตามใจ
+
+  
+  const bgMusic = new Audio("https://www.bensound.com/bensound-music/bensound-love.mp3"); // 🔁 เปลี่ยน URL ได้
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
+
+let isMusicPlaying = true;
+const toggleMusicBtn = document.getElementById("toggleMusicBtn");
+
+toggleMusicBtn.addEventListener("click", async () => {
+  if (isMusicPlaying) {
+    bgMusic.pause();
+    toggleMusicBtn.textContent = "🔇";
+  } else {
+    try { await bgMusic.play(); toggleMusicBtn.textContent = "🔈"; } catch(e) {}
+  }
+  isMusicPlaying = !isMusicPlaying;
+});
+
+
+
+  // ▶️ เพิ่ม div สำหรับเกม
+  const puzzlePage = document.createElement("div");
+  puzzlePage.className = "center";
+  puzzlePage.style.display = "none";
+  document.body.appendChild(puzzlePage);
+
+  // ลบ bgMusic.play() ที่เรียกทันทีออก
+// แล้วไปเล่นตอนกดปุ่มแทน
+giftBtn.addEventListener("click", () => {
+  try { bgMusic.play(); } catch(e) {}
+  openGiftSound.play();
+  mainPage.style.visibility = "hidden";
+  mainPage.style.opacity = "0";
+  launchHearts(15);
+  showLetterPopup();                    // << ใช้อันนี้แทน remove('hidden')
+});
+let sparkleInterval = null;
+
+function showLetterPopup() {
+  const popup = document.getElementById("letterPopup");
+  popup.classList.remove("hidden");
+
+  const card = popup.querySelector(".letter-card");
+  
+  // เริ่มลูปสร้างสปาร์กเคิลเรื่อย ๆ
+  startSparklesLoop(card, 8, 500); 
+}
+let successSparklesTimer = null;
+
+function showSuccessPopup(){
+  const popup = document.getElementById("popupSuccess");
+  const card  = popup.querySelector(".success-card");
+  popup.classList.remove("hidden");
+
+
+  // เริ่มสปาร์กเคิลวน
+  startSuccessSparkles(card);
+}
+
+function closeSuccess(){
+  const popup = document.getElementById("popupSuccess");
+  popup.classList.add("hidden");
+  stopSuccessSparkles();
+}
+
+function startSuccessSparkles(target, count=8, everyMs=600){
+  stopSuccessSparkles();
+  successSparklesTimer = setInterval(() => {
+    for (let i=0;i<count;i++){
+      const s = document.createElement('span');
+      s.className = 'success-sparkle';
+      s.style.left = (Math.random()* (target.offsetWidth - 16) + 8) + 'px';
+      s.style.top  = (Math.random()* (target.offsetHeight - 24) + 12) + 'px';
+      s.style.setProperty('--dx', (Math.random()*70 - 35) + 'px');
+      target.appendChild(s);
+      setTimeout(()=> s.remove(), 2000);
+    }
+  }, everyMs);
+}
+function stopSuccessSparkles(){
+  if (successSparklesTimer){
+    clearInterval(successSparklesTimer);
+    successSparklesTimer = null;
+  }
+}
+
+
+function startSparklesLoop(target, count = 6, intervalMs = 600) {
+  // หยุดลูปเดิมถ้ามี
+  stopSparklesLoop();
+  
+  sparkleInterval = setInterval(() => {
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.style.left = (Math.random() * target.offsetWidth) + 'px';
+      s.style.top  = (Math.random() * target.offsetHeight) + 'px';
+      s.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+      target.appendChild(s);
+      setTimeout(() => s.remove(), 2000);
+    }
+  }, intervalMs);
+}
+
+function stopSparklesLoop() {
+  if (sparkleInterval) {
+    clearInterval(sparkleInterval);
+    sparkleInterval = null;
+  }
+}
+
+// ถ้าจะมีฟังก์ชันปิด popup
+function closeLetterPopup() {
+  document.getElementById("letterPopup").classList.add("hidden");
+  stopSparklesLoop();
+}
+
+
+function closeLetterPopup() {
+  document.getElementById("letterPopup").classList.add("hidden");
+}
+
+function burstSparkles(target, n = 16) {
+  const rect = target.getBoundingClientRect();
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement('span');
+    s.className = 'sparkle';
+    s.style.left = (Math.random() * rect.width * 0.8 + rect.width * 0.1) + 'px';
+    s.style.top  = (Math.random() * rect.height * 0.5 + rect.height * 0.1) + 'px';
+    s.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
+    target.appendChild(s);
+    setTimeout(() => s.remove(), 1600);
+  }
+}
+
+
+
+
+function startMemoryPuzzle() {
+  document.getElementById("letterPopup").classList.add("hidden");
+  mainPage.style.display = "none"; // ⏳ ซ่อนจริงเมื่อต้องการโหลดเกม
+  loadPuzzleGame();
+}
+
+
+
+
+
+  function launchHearts(count) {
+    for (let i = 0; i < count; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = Math.random() * 100 + "vh";
+      heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 15000);
+    }
+  }
+  
+  function goToFinalGame() {
+  document.getElementById("popupSuccess").style.display = "none";
+  puzzlePage.style.display = "none"; // ⬅ ซ่อนเกมเรียงภาพ
+  document.getElementById("finalGame").style.display = "flex";
+}
+
+
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 15000);
+  }, 700);
+
+  const PREVIEW_MAX = 1; // กดได้สูงสุด 3 ครั้งต่อเกม
+
+  // ✅ Memory Puzzle
+  function loadPuzzleGame() {
+  // โครง UI น่ารัก
+  puzzlePage.innerHTML = `
+    <div class="puzzle-card" id="pCard">
+      <div class="puzzle-head">
+        <h1 class="puzzle-title">เกมจิ๊กซอว์เรียงภาพ</h1>
+        <p class="puzzle-sub">ลากและสลับชิ้นส่วนให้ถูกต้องทั้ง 9 ช่อง</p>
+        <div class="puzzle-chips">
+          <span class="chip">ง่ายสุดสู๊ด💗</span>
+        </div>
+      </div>
+
+      <div class="puzzle-grid" id="pGrid"></div>
+
+      <div class="puzzle-actions">
+        <br><button id="btnShuffle" class="btn-cute btn-ghost">🔀</button><br>
+        <br><button id="btnCheck" class="btn-cute">ตรวจคำตอบ</button><br>
+        <br><button id="btnPreview" class="btn-cute btn-ghost">💡(${PREVIEW_MAX})</button><br>
+      </div>
+
+      <p id="pzStatus" class="puzzle-status"></p>
+    </div>
+  `;
+
+  const pGrid = document.getElementById("pGrid");
+  const pCard = document.getElementById("pCard");
+  const status = document.getElementById("pzStatus");
+  const btnPreview = document.getElementById("btnPreview");
+
+  let previewCount = 0;
+
+  // สร้างชิ้นภาพ
+  const imageUrls = [
+    "https://i.postimg.cc/RCg7K4Cw/image1x1.png",
+    "https://i.postimg.cc/k5w4zMpc/image2x1.png",
+    "https://i.postimg.cc/j555b0Vr/image3x1.png",
+    "https://i.postimg.cc/dVwZxf0J/image1x2.png",
+    "https://i.postimg.cc/fLGJj2Fn/image2x2.png",
+    "https://i.postimg.cc/kXFBKyvz/image3x2.png",
+    "https://i.postimg.cc/xd7Cnp9J/image1x3.png",
+    "https://i.postimg.cc/qR37Rc7m/image2x3.png",
+    "https://i.postimg.cc/Y2Q9BxZ0/image3x3.png"
+  ];
+
+  const pieces = imageUrls.map((url, index) => {
+    const img = document.createElement("img");
+    img.src = url;
+    img.className = "puzzle-piece";
+    img.setAttribute("draggable", true);
+    img.dataset.correctIndex = index;     // เอาไว้อ้างอิง
+    img.setAttribute("data-label", index+1); // ใช้โชว์เลขช่วยจำ
+    return img;
+  });
+
+  // วางแบบสุ่มครั้งแรก
+  shuffleArray(pieces);
+  pieces.forEach(p => pGrid.appendChild(p));
+
+  // เปิด Drag & Drop
+  enableDragAndDrop(pGrid);
+
+  // ปุ่ม: สับใหม่
+  document.getElementById("btnShuffle").addEventListener("click", () => {
+    const all = [...pGrid.children];
+    shuffleArray(all);
+    all.forEach(n => pGrid.appendChild(n));
+    status.textContent = "สลับใหม่แล้ว ลองอีกทีน๊า~ ✨";
+    pCard.classList.remove("shake","celebrate");
+
+    // ▼ ถ้าต้องการรีเซ็ตโควตาเมื่อสับใหม่ ให้ uncomment 3 บรรทัดนี้
+    // previewCount = 0;
+    // btnPreview.disabled = false;
+    // btnPreview.textContent = `ดูตัวอย่าง 🖼 (เหลือ ${PREVIEW_MAX})`;
+  });
+
+  // ปุ่ม: ดูตัวอย่างภาพ (จำกัดจำนวนครั้ง)
+  btnPreview.addEventListener("click", () => {
+    if (previewCount >= PREVIEW_MAX) {
+      // แจ้งเตือนเบา ๆ ว่าเต็มแล้ว
+      status.textContent = "ครบจำนวนครั้งดูตัวอย่างแล้วน้า ✨";
+      wiggle(btnPreview);
+      return;
+    }
+
+    previewCount++;
+    const left = PREVIEW_MAX - previewCount;
+    btnPreview.textContent = left > 0
+      ? `💡 ( ${left})`
+      : "💡 (0)";
+
+    // ถ้าหมดโควตา → ปิดปุ่ม
+    if (left === 0) {
+      btnPreview.disabled = true;
+      btnPreview.classList.add("btn-disabled");
+    }
+
+    openPreviewOverlay(); // ฟังก์ชันเปิดภาพตัวอย่าง (อยู่ด้านล่าง)
+  });
+
+
+
+  // ปุ่ม: ตรวจคำตอบ
+  document.getElementById("btnCheck").addEventListener("click", () => {
+    const current = [...pGrid.children].map(img => img.src.split('/').pop());
+    const correct = [
+      "image1x1.png","image2x1.png","image3x1.png",
+      "image1x2.png","image2x2.png","image3x2.png",
+      "image1x3.png","image2x3.png","image3x3.png"
+    ];
+    const isCorrect = current.every((v,i) => v === correct[i]);
+
+    if (isCorrect) {
+      status.textContent = "เย่! เรียงถูกต้องแล้ว 💕";
+      pCard.classList.remove("shake");
+      pCard.classList.add("celebrate");
+      // โชว์ popup สำเร็จเดิมของคุณ
+      showSuccessPopup();
+    } else {
+      status.textContent = "ยังไม่ถูกน้า~ ลองอีกครั้ง 🧸";
+      pCard.classList.remove("celebrate");
+      pCard.classList.add("shake");
+      setTimeout(() => pCard.classList.remove("shake"), 400);
+    }
+  });
+
+  // แสดงหน้าเกม
+  document.body.appendChild(puzzlePage);
+  puzzlePage.style.display = "flex";
+}
+
+
+function enableDragAndDrop(puzzleContainer) {
+  let draggedItem = null;
+
+  function openGiftVideo() {
+  document.getElementById("popupSuccess").style.display = "none";
+  window.open("https://www.canva.com/design/DAGvrphMl34/w44lPAbAlAfqbjG5A33Qzw/watch?utm_content=DAGvrphMl34&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h332c25f8d2", "_blank"); // ← ใส่ลิงก์วิดีโอจริง
+}
+
+
+  puzzleContainer.addEventListener("dragstart", (e) => {
+    if (e.target.tagName === "IMG") {
+      draggedItem = e.target;
+      e.dataTransfer.effectAllowed = "move";
+    }
+  });
+
+  puzzleContainer.addEventListener("dragover", (e) => {
+    if (e.target.tagName === "IMG") {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+    }
+  });
+
+  puzzleContainer.addEventListener("drop", (e) => {
+    if (e.target.tagName === "IMG" && draggedItem && draggedItem !== e.target) {
+      const draggedClone = draggedItem.cloneNode(true);
+      const targetClone = e.target.cloneNode(true);
+
+      puzzleContainer.replaceChild(draggedClone, e.target);
+      puzzleContainer.replaceChild(targetClone, draggedItem);
+
+      enableDragAndDrop(puzzleContainer); // re-enable after replacement
+    }
+  });
+}
+
+// ฟังก์ชันเปิดภาพตัวอย่าง (ใช้เวอร์ชันปรับขนาดตามหน้าจอ)
+  function openPreviewOverlay(){
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.inset = "0";
+    overlay.style.background = "rgba(0,0,0,0.6)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "9999";
+    overlay.style.backdropFilter = "blur(4px)";
+
+    const img = document.createElement("img");
+    img.src = "https://i.postimg.cc/kMS5v9Vb/S-7806978.jpg"; // <- ใส่ภาพเต็มที่ถูกต้อง
+    img.style.width = "min(90vw, 360px)";
+    img.style.height = "auto";
+    img.style.borderRadius = "14px";
+    img.style.boxShadow = "0 8px 24px rgba(0,0,0,0.3)";
+    img.style.border = "4px solid white";
+
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+
+    setTimeout(() => overlay.remove(), 800);
+  }
+
+  // เอฟเฟกต์สั่นเบา ๆ ตอนกดเกินโควตา
+  function wiggle(btn){
+    btn.style.transform = "translateX(0)";
+    btn.animate([
+      { transform: 'translateX(0)' },
+      { transform: 'translateX(-4px)' },
+      { transform: 'translateX(4px)' },
+      { transform: 'translateX(0)' }
+    ], { duration: 250, easing: 'ease-out' });
+  }
+
+  let giftBoxSparklesTimer = null;
+
+function showGiftBoxPopup(){
+  const popup = document.getElementById("giftBoxPopup");
+  const card  = popup.querySelector(".box-card");
+  popup.classList.remove("hidden");
+  startGiftBoxSparkles(card);
+}
+
+function closeGiftBoxPopup(){
+  document.getElementById("giftBoxPopup").classList.add("hidden");
+  stopGiftBoxSparkles();
+}
+
+function startGiftBoxSparkles(target, count=8, everyMs=600){
+  stopGiftBoxSparkles();
+  giftBoxSparklesTimer = setInterval(() => {
+    for (let i=0;i<count;i++){
+      const s = document.createElement('span');
+      s.className = 'box-sparkle';
+      s.style.left = (Math.random()* (target.offsetWidth - 16) + 8) + 'px';
+      s.style.top  = (Math.random()* (target.offsetHeight - 24) + 12) + 'px';
+      s.style.setProperty('--dx', (Math.random()*70 - 35) + 'px');
+      target.appendChild(s);
+      setTimeout(()=> s.remove(), 2000);
+    }
+  }, everyMs);
+}
+function stopGiftBoxSparkles(){
+  if (giftBoxSparklesTimer){
+    clearInterval(giftBoxSparklesTimer);
+    giftBoxSparklesTimer = null;
+  }
+}
+
+
+
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  const giftData = [
+  {
+    gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXg3em13Ymo5ODlybHBlZXBhMWlwb3lkdTJwaG10MGswaWsyMHk3ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PvHNcl1uBI11MmHhbB/giphy.gif",
+    message: "สุขสันต์วันเกิดนะที่รัก ขอให้ทุกวันของเธอมีรอยยิ้ม ขอให้เธอมีความสุข \nให้ปีนี้เป็นปีที่ดีสุด เต็มเปี่ยมไปด้วยคนที่รัก \nมีแต่เรื่องราวดีๆเข้ามาเสมอ “ วันนี้วันของเธอ ขอให้โลกใจดีกับเธอเป็นพิเศษ ”\n🎉happy to you🎉\n-กีต้าร์-"
+  },
+  {
+    gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXg3em13Ymo5ODlybHBlZXBhMWlwb3lkdTJwaG10MGswaWsyMHk3ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aoq0zfGvUPxfDGUvFZ/giphy.gif",
+    message: "สุขสันต์วันเกิดนะที่รัก ขอให้ทุกวันของเธอมีรอยยิ้ม ขอให้เธอมีความสุข \nให้ปีนี้เป็นปีที่ดีสุด เต็มเปี่ยมไปด้วยคนที่รัก \nมีแต่เรื่องราวดีๆเข้ามาเสมอ “ วันนี้วันของเธอ ขอให้โลกใจดีกับเธอเป็นพิเศษ ”\n🎉happy to you🎉\n-กีต้าร์-"
+  },
+  {
+    gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGhkbXNjMjJuY2JjbjhnZnBscXdyMmlweHo1MmRsZXNmZWx3MTFtaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kvwiUUHLEacUwgD2R5/giphy.gif",
+    message: "สุขสันต์วันเกิดนะที่รัก ขอให้ทุกวันของเธอมีรอยยิ้ม ขอให้เธอมีความสุข \nให้ปีนี้เป็นปีที่ดีสุด เต็มเปี่ยมไปด้วยคนที่รัก \nมีแต่เรื่องราวดีๆเข้ามาเสมอ “ วันนี้วันของเธอ ขอให้โลกใจดีกับเธอเป็นพิเศษ ”\n🎉happy to you🎉\n-กีต้าร์-"
+  }
+];
+
+
+
+  let selectedGiftIndex = 0; // เก็บ index ไว้
+
+function openGift(index) {
+  giftSound.play();
+  selectedGiftIndex = index;
+
+  const boxImages = [
+    "https://i.postimg.cc/MpMdmyDG/Chat-GPT-Image-6-2568-16-28-12.png",
+    "https://i.postimg.cc/MpMdmyDG/Chat-GPT-Image-6-2568-16-28-12.png",
+    "https://i.postimg.cc/MpMdmyDG/Chat-GPT-Image-6-2568-16-28-12.png"
+  ];
+  document.getElementById("selectedBoxImg").src = boxImages[index];
+  showGiftBoxPopup();
+}
+
+function revealGift() {
+  stopGiftBoxSparkles();
+  document.getElementById("giftBoxPopup").classList.add("hidden");
+
+  const popup = document.getElementById("giftCardPopup");
+  document.getElementById("giftGif").src = giftData[selectedGiftIndex].gif;
+  document.getElementById("giftMessage").innerText = giftData[selectedGiftIndex].message;
+
+  popup.classList.remove("hidden");
+  launchSurprisePopper();
+
+}
+
+
+
+
+  const giftSound = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
+
+  function closePopup() {
+    document.getElementById("giftCardPopup").classList.add("hidden");
+  }
+
+  function showFinalGame() {
+    document.getElementById("finalGame").style.display = "flex";
+  }
+
+  function launchSurprisePopper() {
+  const colors = ['#ff66b2', '#ffcc00', '#66e0ff', '#b266ff', '#ff9966', '#aaffc3'];
+  const shots = 4;              // 🔁 จำนวนชุดยิง
+  const countPerShot = 25;      // 🔁 จำนวนพลุต่อชุด
+  const interval = 350;         // ⏱️ ระยะห่างแต่ละชุด (ms)
+
+  for (let i = 0; i < shots; i++) {
+    setTimeout(() => {
+      for (let j = 0; j < countPerShot; j++) {
+        createPopper('left', colors);
+        createPopper('right', colors);
+      }
+    }, i * interval);
+  }
+}
+
+
+function createPopper(side, colors) {
+  const pop = document.createElement('div');
+  pop.classList.add('party-popper');
+  pop.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  pop.style.bottom = '0px';
+
+  if (side === 'left') {
+    pop.style.left = '0px';
+  } else {
+    pop.style.right = '0px';
+  }
+
+  const angleDeg = side === 'left'
+    ? Math.random() * 40 + 20
+    : Math.random() * -40 - 20;
+
+  const angle = angleDeg * (Math.PI / 180);
+  const distance = Math.random() * 400 + 200;
+
+  const x = Math.cos(angle) * distance;
+  const y = Math.sin(angle) * distance;
+
+  pop.animate([
+    { transform: 'translate(0, 0)', opacity: 1 },
+    { transform: `translate(${side === 'left' ? x : -x}px, -${Math.abs(y)}px) rotate(720deg)`, opacity: 0 }
+  ], {
+    duration: 1500 + Math.random() * 300,
+    easing: 'ease-out',
+    delay: Math.random() * 300,
+    fill: 'forwards'
+  });
+
+  document.body.appendChild(pop);
+  setTimeout(() => pop.remove(), 2000);
+}
+
+// เรียกหลังจากแสดง #finalGame แล้ว (คุณเรียก document.getElementById("finalGame").style.display = "flex"; อยู่แล้ว)
+function initFinalGameUI(){
+  const grid = document.getElementById('giftGrid');
+  if (!grid) return;
+
+  // ติดคลิกให้ทุกกล่อง
+  grid.querySelectorAll('.gift-card').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // ไฮไลต์กล่องที่เลือก
+      grid.querySelectorAll('.gift-card').forEach(b => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+
+      const idx = parseInt(btn.dataset.index, 10) || 0;
+      // ใช้ฟังก์ชันเดิมของคุณ
+      openGift(idx);
+    });
+  });
+}
+
+// เรียกทันทีเมื่อเข้า final game (แทรกหลังบรรทัดที่คุณทำ display:flex)
+function goToFinalGame(){
+  document.getElementById("popupSuccess").classList.add("hidden");
+  puzzlePage.style.display = "none";
+  const fg = document.getElementById("finalGame");
+  fg.style.display = "flex";
+  initFinalGameUI(); // << เพิ่มบรรทัดนี้
+}
+
+let cardSparklesTimer = null;
+
+function showGiftCard(){
+  const popup = document.getElementById("giftCardPopup");
+  const card  = popup.querySelector(".card-wrap");
+  popup.classList.remove("hidden");
+
+  // เริ่มสปาร์กเคิลวน
+  startCardSparkles(card);
+
+  // ยิงคอนเฟตตี้เดิมของคุณ (ถ้าต้องการซ้ำ)
+  // if (typeof launchSurprisePopper === 'function') launchSurprisePopper();
+}
+
+function closeGiftCard(){
+  document.getElementById("giftCardPopup").classList.add("hidden");
+  stopCardSparkles();
+}
+
+function startCardSparkles(target, count=8, everyMs=600){
+  stopCardSparkles();
+  cardSparklesTimer = setInterval(() => {
+    for (let i=0;i<count;i++){
+      const s = document.createElement('span');
+      s.className = 'card-sparkle';
+      s.style.left = (Math.random()* (target.offsetWidth - 16) + 8) + 'px';
+      s.style.top  = (Math.random()* (target.offsetHeight - 24) + 12) + 'px';
+      s.style.setProperty('--dx', (Math.random()*70 - 35) + 'px');
+      target.appendChild(s);
+      setTimeout(()=> s.remove(), 2000);
+    }
+  }, everyMs);
+}
+function stopCardSparkles(){
+  if (cardSparklesTimer){
+    clearInterval(cardSparklesTimer);
+    cardSparklesTimer = null;
+  }
+}
+
+/* ปรับ revealGift() เดิมของคุณให้ตั้งค่าลิงก์ดาวน์โหลด + แสดง popup ใหม่นี้ */
+function revealGift() {
+  // ปิด popup ชั้นแรก (และหยุดสปาร์กเคิลของชั้นแรก ถ้ามี)
+  document.getElementById("giftBoxPopup").classList.add("hidden");
+  stopGiftBoxSparkles && stopGiftBoxSparkles();
+
+  // ตั้ง GIF และข้อความจาก giftData[selectedGiftIndex]
+  const gif = giftData[selectedGiftIndex].gif;
+  const msg = giftData[selectedGiftIndex].message;
+  document.getElementById("giftGif").src = gif;
+  document.getElementById("giftMessage").innerText = msg;
+
+  // ตั้งลิงก์บันทึกเป็นไฟล์เดียวกับ GIF
+  const dl = document.getElementById("downloadGiftBtn");
+  dl.href = gif;
+
+  // แสดงการ์ดของขวัญจริง
+  showGiftCard();
+
+  // เอฟเฟกต์ฉลอง (ใช้ของเดิม)
+  launchSurprisePopper && launchSurprisePopper();
+  
+}
+
+// ไปหน้าแรก (ซ่อนทุกอย่างที่เกี่ยวกับเกม/ของขวัญ)
+function returnToHome(){
+  // ซ่อน popup การ์ด + คลาสกันเลื่อน ถ้ามีใช้
+  const giftCardPopup = document.getElementById("giftCardPopup");
+  if (giftCardPopup) giftCardPopup.classList.add("hidden");
+  document.body.classList.remove("no-scroll");
+
+  // หยุดเอฟเฟกต์ของการ์ด (ถ้ามี)
+  stopCardSparkles && stopCardSparkles();
+  stopCelebrationLoop && stopCelebrationLoop();
+
+  // ซ่อนหน้าสุดท้าย/เกม/ป๊อปอัปอื่น ๆ เผื่อยังค้าง
+  const finalGame = document.getElementById("finalGame");
+  if (finalGame) finalGame.style.display = "none";
+
+  if (typeof puzzlePage !== "undefined" && puzzlePage) {
+    puzzlePage.style.display = "none";
+  }
+  const letter = document.getElementById("letterPopup");
+  if (letter) letter.classList.add("hidden");
+  const success = document.getElementById("popupSuccess");
+  if (success) success.classList.add("hidden");
+  const box = document.getElementById("giftBoxPopup");
+  if (box) box.classList.add("hidden");
+
+  // แสดงหน้าแรกกลับมา
+  const mainPage = document.getElementById("mainPage");
+  if (mainPage){
+    mainPage.style.display   = "flex";     // สำคัญ: เคยโดน set เป็น none
+    mainPage.style.visibility= "visible";
+    mainPage.style.opacity   = "1";        // มี transition opacity อยู่แล้ว
+  }
+
+  // เลื่อนขึ้นบนสุด
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// แก้ฟังก์ชันปิดการ์ดให้กลับบ้าน
+function closeGiftCard(){
+  returnToHome();
+}
+
+
+let celebrationLoopTimer = null;
+
+function startCelebrationLoop(intervalMs = 3000) {
+  stopCelebrationLoop(); // กันซ้ำ
+  celebrationLoopTimer = setInterval(() => {
+    if (typeof launchSurprisePopper === 'function') {
+      launchSurprisePopper();
+    }
+  }, intervalMs);
+}
+
+function stopCelebrationLoop() {
+  if (celebrationLoopTimer) {
+    clearInterval(celebrationLoopTimer);
+    celebrationLoopTimer = null;
+  }
+}
+
+function showGiftCard(){
+  const popup = document.getElementById("giftCardPopup");
+  const card  = popup.querySelector(".card-wrap");
+  popup.classList.remove("hidden");
+  startCardSparkles(card);
+
+  // ⚡ ยิงเอฟเฟกต์ทันที "พร้อมกับ" การแสดงผล popup
+  // ใช้ requestAnimationFrame เพื่อให้ DOM วาดก่อน 1 เฟรม แล้วค่อยยิง
+  if (typeof launchSurprisePopper === 'function') {
+    requestAnimationFrame(() => {
+      launchSurprisePopper();       // ยิงทันทีรอบแรก
+      startCelebrationLoop(3000);   // แล้วค่อยวนลูปทุก 3 วินาที
+    });
+  } else {
+    // เผื่อกรณีไม่มีฟังก์ชันเดิม
+    startCelebrationLoop(3000);
+  }
+}
+
+function closeGiftCard(){
+  document.getElementById("giftCardPopup").classList.add("hidden");
+  stopCardSparkles();
+  stopCelebrationLoop(); // หยุดลูปเมื่อปิด
+}
+
+function revealGift() {
+  // ปิด popup ชั้นแรก
+  document.getElementById("giftBoxPopup").classList.add("hidden");
+  stopGiftBoxSparkles && stopGiftBoxSparkles();
+
+  // ตั้งค่ากิฟต์
+  const gif = giftData[selectedGiftIndex].gif;
+  const msg = giftData[selectedGiftIndex].message;
+
+  const gifEl = document.getElementById("giftGif");
+  gifEl.setAttribute('crossorigin','anonymous');
+  gifEl.src = gif;
+
+  // 🔽 ตั้งหัวข้อย่อย: "ของขวัญชิ้นพิเศษ" (คงที่) + "คือ …" (เปลี่ยนตามกล่อง)
+  const subValueByBox = ["คือ… เลี้ยงหมูกะทะ/ชาบู", "คือ… นาฬิกาสุดโปรด", "คือ… กระเป๋าตามใจ"]; // เปลี่ยนเป็นข้อความที่ต้องการได้เลย
+  const sub = document.getElementById("giftSubTitle");
+  sub.innerHTML = `
+    <span class="sub-value">${subValueByBox[selectedGiftIndex] || "คือ …"}</span>
+  `;
+
+  document.getElementById("giftMessage").innerText = msg;
+
+  // แสดงการ์ด + เอฟเฟกต์
+  showGiftCard();
+  setGiftQR(VIDEO_URL);
+
+}
+
+
+// 🎵 ใช้เสียงปุ่มเดียวกับหน้าแรก
+const globalClickSound = new Audio("https://www.soundjay.com/buttons/sounds/button-09a.mp3");
+globalClickSound.volume = 0.05;
+
+// ฟังก์ชันเล่นเสียง (ป้องกันกดถี่เกินไป)
+function playClickSound() {
+  globalClickSound.currentTime = 0; // เล่นใหม่ตั้งแต่ต้น
+  globalClickSound.play();
+}
+
+// 📌 ให้ทุกการคลิกบนเว็บมีเสียง
+document.addEventListener("click", () => {
+  playClickSound();
+});
+
+// 📌 ให้ทุกการลากเริ่มต้นมีเสียง
+document.addEventListener("dragstart", () => {
+  playClickSound();
+});
+
+// 📌 ให้ทุกการปล่อยวางมีเสียง
+document.addEventListener("drop", () => {
+  playClickSound();
+});
+
+// โหลด/เรียกใช้ html2canvas แล้วแคปฯ เฉพาะพื้นที่การ์ด (#cardCanvasArea)
+function ensureHtml2Canvas(ready){
+  if (window.html2canvas) return ready();
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+  s.onload = ready;
+  document.head.appendChild(s);
+}
+
+function saveCardAsImage(){
+  const area = document.getElementById('cardCanvasArea');
+  if (!area) return;
+
+  ensureHtml2Canvas(() => {
+    html2canvas(area, {
+      backgroundColor: null, // โปร่งใส (จะเห็นพื้นหลังป๊อปอัป)
+      useCORS: true,         // อนุญาตโหลดภาพข้ามโดเมน (ต้องพึ่ง CORS ของปลายทาง)
+      scale: 2               // คมชัดขึ้น
+    }).then(canvas => {
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Happy Card.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      }, 'image/png');
+    }).catch(err => {
+      alert('บันทึกการ์ดไม่สำเร็จ (อาจติดปัญหา CORS ของภาพ GIF) — ลองใช้ไฟล์ภาพที่มี CORS เปิดใช้งาน หรืออัปโหลดภาพไปยังโฮสต์ของคุณเองนะครับ');
+      console.error(err);
+    });
+  });
+}
+
+// ตั้งค่า/อัปเดต QR ให้ชี้ไปยังวิดีโอ
+function setGiftQR(videoUrl){
+  const img = document.getElementById('giftQR');
+  const a   = document.getElementById('giftQRLink');
+  if (!img || !a) return;
+
+  a.href = videoUrl;
+  // ใช้บริการ QR ที่เปิด CORS เพื่อให้ html2canvas จับภาพได้
+  const api = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=0&data=';
+  img.crossOrigin = 'anonymous';
+  img.src = api + encodeURIComponent(videoUrl);
+}
+
+// เรียกตอนเปิดการ์ด (ใช้ลิงก์ของคุณแทน)
+const VIDEO_URL = 'https://www.canva.com/design/DAGvrphMl34/w44lPAbAlAfqbjG5A33Qzw/watch?utm_content=DAGvrphMl34&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h332c25f8d2';
+
+
+// ผูกปุ่มเซฟการ์ด (ปุ่มอยู่ใน DOM อยู่แล้ว)
+const saveBtn = document.getElementById('saveCardBtn');
+if (saveBtn) saveBtn.addEventListener('click', saveCardAsImage);
+/* === FORCE OVERRIDE: put this at the very end of your <script> === */
+(function () {
+  function returnToHome() {
+    // ซ่อนป๊อปอัป/หน้าต่าง ๆ เผื่อค้าง
+    const ids = ["giftCardPopup", "giftBoxPopup", "popupSuccess", "letterPopup"];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add("hidden");
     });
 
-    function closePopup() {
-      popup.style.display = "none";
+    // ซ่อนหน้าเกม/หน้าสุดท้าย
+    const finalGame = document.getElementById("finalGame");
+    if (finalGame) finalGame.style.display = "none";
+    if (typeof puzzlePage !== "undefined" && puzzlePage) {
+      puzzlePage.style.display = "none";
     }
 
-    function typePopup(text, el, i = 0) {
-      if (i < text.length) {
-        el.innerHTML += text.charAt(i);
-        setTimeout(() => typePopup(text, el, i + 1), 50);
-      }
+    // ปลดล็อกเลื่อนหน้าถ้ามีใช้ no-scroll
+    document.body.classList.remove("no-scroll");
+
+    // แสดงหน้าแรกกลับมา
+    const mainPage = document.getElementById("mainPage");
+    if (mainPage) {
+      mainPage.style.display = "flex";
+      mainPage.style.visibility = "visible";
+      mainPage.style.opacity = "1";
     }
 
-    function launchHearts(count) {
-      for (let i = 0; i < count; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = Math.random() * 100 + "vh";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-      }
-    }
-  </script>
+    // หยุดเอฟเฟกต์ถ้ามี
+    if (typeof stopCardSparkles === "function") stopCardSparkles();
+    if (typeof stopCelebrationLoop === "function") stopCelebrationLoop();
+
+    // เลื่อนขึ้นบนสุด
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // บังคับให้ closeGiftCard ใช้เวอร์ชันนี้แน่นอน
+  window.returnToHome = returnToHome;
+  window.closeGiftCard = function () { returnToHome(); };
+
+  // เผื่อ inline onclick หลุด ให้ผูกปุ่มปิดด้วย
+  const btnClose = document.querySelector('#giftCardPopup .btn-ghost');
+  if (btnClose) btnClose.onclick = window.closeGiftCard;
+})();
+
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
 </body>
 </html>
